@@ -81,6 +81,15 @@ get '/Animal/:location' do
 
 end
 
+get '/Count' do
+  json SeenAnimal.sum("count_of_times_seen")
+end
+
+get '/Countofltb' do
+  json SeenAnimal.where(species:"lion").or(SeenAnimal.where(species:"tiger").or(SeenAnimal.where(species:"bear"))).sum("count_of_times_seen")
+
+end
+
 # Create a `PUT /Animal/{id}` endpoint that adds 1 to the count of times seen for that animal
 put '/Animal/:id' do
   # Find the first animal in the database where the column `species` exactly matches what is inside the variable `species`
