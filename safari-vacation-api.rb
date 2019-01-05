@@ -110,4 +110,9 @@ delete '/Animal/:id' do
   json found_animal
 end
 
+delete '/Animals/:location' do
+  found_animal = SeenAnimal.where(location_of_last_seen: params["location"]).delete_all
+
+  json animal: found_animal
+end
 
