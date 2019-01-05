@@ -2,6 +2,15 @@ require 'sinatra'
 require 'sinatra/json'
 require 'sinatra/reloader' if development?
 require 'active_record'
+require 'rack/cors'
+
+# Allow anyone to access our API via a browser
+use Rack::Cors do |config|
+  config.allow do |allow|
+    allow.origins '*'
+    allow.resource '*'
+  end
+end
 
 ActiveRecord::Base.establish_connection(
   adapter: "postgresql",
